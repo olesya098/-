@@ -38,10 +38,11 @@ public class TextStatistics {
             int Pages = (int) Math.ceil((double) totalLines / 10); // Округляем вверх
             //Math.ceil округление
             // Подсчет количества абзацев, предполагая, что абзац разделен табуляцией
-            int Paragraphs = text.split("\\t").length; // Разделяем по символу табуляции
+            int Paragraphs = text.split(" {4}").length; // Разделяем по четырем пробелам
             if (Paragraphs == 0 && totalLines > 0) {
-                Paragraphs = 1; // Если текст не пустой, но абзацев нет, то считаем один абзац
+                Paragraphs = 1; // Если текст не пустой, но абзацев нет, значит, один абзац.
             }
+
             // Вывод статистики в консоль
             System.out.println("Количество символов в тексте: " + totalCharacters);
             System.out.println("Количество символов без пробелов: " + Prob);
