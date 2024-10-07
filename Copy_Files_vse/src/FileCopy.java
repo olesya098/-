@@ -44,7 +44,7 @@ class FileCopy {
         ExecutorService executor = Executors.newFixedThreadPool(2);
         // Создаем пул потоков с двумя потоками
         try { // Запускаем оба задания параллельно
-            executor.invokeAll(List.of(
+            executor.invokeAll(List.of(//Этот код запускает две задачи копирования файлов параллельно
                     Executors.callable(() -> {
                         try {
                             copyFileUsingStream(sFile1, dFile1); // Копируем первый файл
