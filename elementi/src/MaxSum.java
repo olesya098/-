@@ -5,6 +5,19 @@ public class MaxSum {
     public static void main(String[] args) {
         int number = 10000; // Количество случайных чисел для генерации
         int[] sequence = Random(number); // Генерируем массив случайных целых чисел
+
+        // Выводим все сгенерированные числа
+        System.out.println("Сгенерированные случайные числа:");
+        for (int i = 0; i < sequence.length; i++) {
+            // Выводим число и пробел после него
+            System.out.print(sequence[i] + " ");
+            // Переходим на новую строку после каждых 20 чисел для лучшей читаемости
+            if ((i + 1) % 20 == 0) {
+                System.out.println();
+            }
+        }
+        System.out.println("\n"); // Добавляем пустую строку для разделения
+
         int result = maxSum(sequence); // Находим максимальную сумму квадратов двух элементов
         System.out.println("Максимальная сумма квадратов: " + result);
     }
