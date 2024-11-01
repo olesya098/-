@@ -3,8 +3,22 @@ import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
 
+/**
+ * Класс Save предназначен для параллельного скачивания и сохранения медиафайлов (изображений, аудио, видео)
+ * с последующим их открытием в приложениях по умолчанию.
+ * В классе показывается использование многопоточности для одновременной загрузки нескольких файлов,
+ *
+ * @author Олеся
+ * @version 1.0
+ * @since 2024-11-01
+ */
 public class Save {
 
+    /**
+     * Точка входа в программу.
+     *
+     * @param args аргументы командной строки
+     */
     public static void main(String[] args) {
         String imagePath = "G:/Системное программирование/Vse_save/image.jpg";
         String audioPath = "G:/Системное программирование/Vse_save/file.mp3";
@@ -30,7 +44,6 @@ public class Save {
         audioD.start();
         videoD.start();
 
-        // Ожидание завершения каждого потока
         try {
             imageD.join();
             audioD.join();
@@ -39,16 +52,19 @@ public class Save {
             System.err.println("Ошибка при ожидании завершения потока: " + e.getMessage());
         }
 
-        // Уведомление о завершении загрузки всех файлов
         System.out.println("Загрузка файлов завершена.");
 
-        // Открытие загруженных файлов
         openFile(imagePath);
         openFile(audioPath);
         openFile(videoPath);
     }
 
-    // Метод для скачивания файла по указанному URL
+    /**
+     * Скачивает файл по указанному URL и сохраняет его в указанное место на диске.
+     *
+     * @param fileURL URL-адрес файла для скачивания
+     * @param output путь для сохранения файла на локальном диске
+     */
     private static void downloadFile(String fileURL, String output) {
         try {
             URLConnection conn = new URL(fileURL).openConnection();
@@ -70,13 +86,15 @@ public class Save {
         }
     }
 
-    // Метод для открытия файла с использованием Desktop
+    /**
+     * Открывает указанный файл в программе по умолчанию, связанной с типом файла.
+     *
+     * @param filePath путь к файлу, который необходимо открыть
+     */
     private static void openFile(String filePath) {
         try {
             File file = new File(filePath);
-            // Проверяем, поддерживает ли текущая платформа функциональность Desktop
             if (Desktop.isDesktopSupported()) {
-                // Если поддерживается, открываем файл в приложении по умолчанию, связанном с его типом
                 Desktop.getDesktop().open(file);
             } else {
                 System.err.println("Desktop не поддерживается.");
